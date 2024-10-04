@@ -4,8 +4,19 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
+/**
+ * La clase <code>generarHTML</code> es responsable de generar archivos HTML
+ * a partir de un archivo CSV que contiene información sobre películas.
+ * Utiliza una plantilla HTML para crear la estructura del archivo de salida
+ * y escribe un archivo HTML para cada película.
+ */
 public class generarHTML {
 
+    /**
+     * Método principal que inicia la ejecución del programa.
+     *
+     * @param args Argumentos de línea de comandos (no se utilizan en este programa).
+     */
     public static void main(String[] args) {
         // Ruta completa al archivo CSV y al archivo de plantilla HTML
         String peliculas_csv = "C:/Users/OscarLuquePorca/IdeaProjects/Reto_AD_1/peliculas.csv";
@@ -13,7 +24,6 @@ public class generarHTML {
         String Salida = "C:/Users/OscarLuquePorca/IdeaProjects/Reto_AD_1/salida";
 
         try {
-
             File archivoCSVFile = new File(peliculas_csv);
             if (!archivoCSVFile.exists()) {
                 System.err.println("El archivo CSV no existe: " + peliculas_csv);
@@ -59,7 +69,14 @@ public class generarHTML {
         }
     }
 
-    // Método para leer el archivo CSV
+    /**
+     * Método para leer el archivo CSV y almacenar la información de las películas.
+     *
+     * @param rutaArchivoCSV Ruta al archivo CSV que contiene los datos de las películas.
+     * @return Una lista de arreglos de cadenas, donde cada arreglo representa
+     *         una película y sus propiedades (ID, título, año, director, género).
+     * @throws IOException Si ocurre un error al leer el archivo.
+     */
     public static List<String[]> readCSV(String rutaArchivoCSV) throws IOException {
         List<String[]> peliculas = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivoCSV))) {
@@ -78,7 +95,15 @@ public class generarHTML {
         return peliculas;
     }
 
-    // Método para generar un archivo HTML por cada película
+    /**
+     * Método para generar un archivo HTML por cada película.
+     *
+     * @param pelicula Arreglo de cadenas que contiene los datos de la película
+     *                 (ID, título, año, director, género).
+     * @param template Plantilla HTML que se utilizará para crear el archivo.
+     * @param carpetaSalida Ruta de la carpeta donde se guardarán los archivos HTML generados.
+     * @throws IOException Si ocurre un error al crear el archivo HTML.
+     */
     public static void genera_Archivo_HTML(String[] pelicula, String template, String carpetaSalida) throws IOException {
         // Reemplazar las variables de la plantilla con los datos de la película
         String htmlContenido = template
